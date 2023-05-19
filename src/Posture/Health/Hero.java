@@ -2,17 +2,31 @@ package Posture.Health;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 
 public class Hero extends JFrame  implements ActionListener {
+    static boolean flag;
     Hero() {
 //        setSize(600, 400);
-        setLocationRelativeTo(null);
+
+        setUndecorated(true);
+        setIconImage(new ImageIcon(ClassLoader.getSystemResource("icons/spine.png")).getImage());
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getSource() == getIconImage()) {
+                    e.consume();
+                }
+            }
+        });
+
+
         setLayout(null);
         getContentPane().setBackground(Color.black);
         setAlwaysOnTop(true);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
 
         //Label
         JLabel mantain = new JLabel("POSTURE");
@@ -99,10 +113,11 @@ public class Hero extends JFrame  implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
+        flag = false;
         dispose();
     }
 
-    public static void main(String[] args) {
-        new Hero();
-    }
+//    public static void main(String[] args) {
+//        new Hero();
+//    }
 }
